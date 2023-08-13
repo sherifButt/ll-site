@@ -9,13 +9,6 @@ export async function POST(req) {
     const { email, name, company, phone, message, budget } = await req.json();
 
     console.log(email)
-    // const transporter = nodemailer.createTransport({
-    //   service: 'Gmail',
-    //   auth: {
-    //     user: 'sherif.butt@gmail.com',
-    //     pass: '@ewaloveme',
-    //   },
-    // });
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -27,13 +20,11 @@ export async function POST(req) {
       },
     });
 
-
-
     const mailData = {
       from: process.env.SMTP_USER,
       to: process.env.SMTP_RECIPIENT,
       subject: `New contact from ${name}`,
-      text: message + " | From: " + email + " | Budget: Around £" + budget+ ",000 | Phone: " + phone,
+      text: message + " | From: " + email + " | Budget: Around £" + budget+ ",000 | Phone: " + phone + " | Company: " + company,
       html: `<div>${message}</div><p>Sender: ${email}</p><p>Budget: ${budget}</p>`
     };
 
