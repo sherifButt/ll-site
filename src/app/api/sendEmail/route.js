@@ -46,7 +46,7 @@ export async function POST(req) {
       example: 
       <p>Dear Sherif,</p> 
       user data: ${ JSON.stringify(mailData) }
-      our data: { "Name": "Sherif", "CompanyName":"Loyalleads", email: "contact@loyalleads.co.uk", phone: "07712345678"}
+      our data: { "Name": "Sherif", "Company Name":"Loyalleads", "email": "contact@loyalleads.co.uk", "phone": "07712345678"}
       `},
     ];
 

@@ -1,5 +1,5 @@
 'use client'
-import { useId, useState,useRef, useEffect } from 'react'
+import { useId, useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import parse from 'html-react-parser';
 
@@ -95,31 +95,25 @@ export function ContactForm() {
         // console.log(formData);
         try {
             setIsSending(true);
-            const response = await fetch('https://hooks.zapier.com/hooks/catch/3482178/39r3y7v/silent', {
+            
+            const response = await fetch('/api/sendEmail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
-            // const response = await fetch('/api/sendEmail', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(formData),
-            // });
-            
+
             const data = await response.json();
             if (response.status === 200) {
                 console.log('Email sent successfully');
-                console.log( data.response);
-                setGptResponse( data.response)
+                console.log(data.response);
+                setGptResponse(data.response)
                 setIsSending(false);
                 setSent(true);
             } else {
                 console.error('Failed to send email');
-                console.error( data.error);
+                console.error(data.error);
                 setIsSending(false);
             }
         } catch (error) {
@@ -128,16 +122,16 @@ export function ContactForm() {
         }
     };
     // console.log(formData);
-useEffect(()=>{
-    if(sent&& gptResponseRef.current){
-        gptResponseRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-},[gptResponse])
+    useEffect(() => {
+        if (sent && gptResponseRef.current) {
+            gptResponseRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [gptResponse])
     return (
         <FadeIn className="lg:order-last">
             <form onSubmit={handleSubmit} ref={gptResponseRef}>
                 <h2 className="font-display text-base font-semibold text-neutral-950" >
-                    {sent?'Received ✓':'Work inquiries'}
+                    {sent ? 'Received ✓' : 'Work inquiries'}
                 </h2>
                 <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
                     {!sent && (<>
@@ -192,7 +186,7 @@ useEffect(()=>{
                     </>
                     )}
                     {sent && (
-                        <div  className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
+                        <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
                             <h3 className="text-base/6 text-neutral-500" > {parse(gptResponse)} </h3>
                         </div>
                     )}
