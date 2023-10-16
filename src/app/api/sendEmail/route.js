@@ -35,7 +35,7 @@ export async function POST(req) {
       {role: 'user', content: `compose  a message user info, make it short message as a contact form message
       note: return response formatted in html, don't add <body> or <html> tags, just return the html content,
       example: 
-      <p>Dear Sherif,</p> 
+      <p>Dear user,</p> 
       user data: ${ JSON.stringify(mailData) }
       our data: { "Name": "Sherif", "Company Name":"Loyalleads", "email": "contact@loyalleads.co.uk", "phone": "07712345678"}
       `},

@@ -66,11 +66,11 @@ function RadioInput({ label, checkedValue, ...props }) {
 
 
 const formInitialValues = {
-    name: 'Sherif Butt',
-    email: 'sherif.butt@gamail.com',
-    phone: '07477194809',
-    company: 'Loyalleads',
-    message: ' I would like to discuss a project with you. Please contact me. ',
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    message: '',
     budget: '25',
 }
 
