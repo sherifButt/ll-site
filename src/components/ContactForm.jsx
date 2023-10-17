@@ -3,6 +3,7 @@ import { useId, useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import parse from 'html-react-parser';
 
+import chatbot from '../scripts/chatbot.js'
 
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'

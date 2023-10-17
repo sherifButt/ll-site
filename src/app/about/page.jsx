@@ -59,21 +59,21 @@ function Culture() {
 }
 
 const team = [
-  // {
-  //   title: 'Leadership',
-  //   people: [
-  //     {
-  //       name: 'Sherif Butt',
-  //       role: 'Co-Founder / CTO',
-  //       image: { src: imageSherifButt },
-  //     },
-  //     {
-  //       name: 'Ewa Butt',
-  //       role: 'Co-Founder / CFO',
-  //       image: { src: imageEwaButt },
-  //     }
-  //   ],
-  // },
+  {
+    title: 'Leadership',
+    people: [
+      {
+        name: 'Sherif Butt',
+        role: 'Co-Founder / CTO',
+        image: { src: imageSherifButt },
+      },
+      {
+        name: 'Ewa Butt',
+        role: 'Co-Founder / CFO',
+        image: { src: imageEwaButt },
+      }
+    ],
+  },
   {
     title: 'Team',
     people: [
@@ -94,11 +94,11 @@ const team = [
         role: 'Senior Developer',
         image: { src: imageAbdullahTahaIbrahim },
       }
-      // ,{
-      //   name: 'Julia Butt',
-      //   role: 'Product Designer',
-      //   image: { src: imageJuliaButt },
-      // },
+      ,{
+        name: 'Julia Butt',
+        role: 'Product Designer',
+        image: { src: imageJuliaButt },
+      },
     ],
   },
 ]
