@@ -1,3 +1,4 @@
+import Chatbot from '@/components/Chatbot'
 import { RootLayout } from '@/components/RootLayout'
 import '@/styles/tailwind.css'
 
@@ -13,7 +14,7 @@ export default function Layout({ children }) {
     <html lang="en" className="h-full bg-neutral-950 text-base antialiased">
   
       <body className="flex min-h-full flex-col">
-        
+      <Chatbot/>
         <RootLayout>{children}</RootLayout>
       </body>
     </html>

@@ -2,9 +2,6 @@
 import { useId, useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import parse from 'html-react-parser';
-
-import chatbot from '../scripts/chatbot.js'
-
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
@@ -16,9 +13,10 @@ import { Logo } from '@/components/Logo'
 
 function TextInput({ label, ...props }) {
     let id = useId()
-
+    
     return (
         <div className="group relative z-0 transition-all focus-within:z-10">
+          
             <input
                 type="text"
                 id={id}
