@@ -59,21 +59,17 @@ function Culture() {
 }
 
 const team = [
-  {
-    title: 'Leadership',
-    people: [
-      {
-        name: 'Sherif Butt',
-        role: 'Co-Founder / CTO',
-        image: { src: imageSherifButt },
-      },
-      {
-        name: 'Ewa Butt',
-        role: 'Co-Founder / CFO',
-        image: { src: imageEwaButt },
-      }
-    ],
-  },
+  // {
+  //   title: 'Leadership',
+  //   people: [
+      
+  //     {
+  //       name: 'Ewa Butt',
+  //       role: 'Co-Founder / CFO',
+  //       image: { src: imageEwaButt },
+  //     }
+  //   ],
+  // },
   {
     title: 'Team',
     people: [
@@ -90,12 +86,17 @@ const team = [
         image: { src: imageJeffreyWebb },
       },
       {
+        name: 'Sherif Butt',
+        role: 'Head of Software Development',
+        image: { src: imageSherifButt },
+      },
+      {
         name: 'Abdullah  Ibrahim ',
         role: 'Senior Developer',
         image: { src: imageAbdullahTahaIbrahim },
       }
       ,{
-        name: 'Julia Butt',
+        name: 'Julia S M B',
         role: 'Product Designer',
         image: { src: imageJuliaButt },
       },
@@ -178,11 +179,11 @@ export default async function About() {
         </div>
       </PageIntro>
       <Container className="mt-16">
-        <StatList>
+        {/* <StatList>
           <StatListItem value="35" label="Underpaid employees" />
           <StatListItem value="52" label="Placated clients" />
           <StatListItem value="$25M" label="Invoices billed" />
-        </StatList>
+        </StatList> */}
       </Container>
 
       <Culture />

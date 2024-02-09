@@ -15,7 +15,8 @@ import logoHomeWork from '@/images/clients/home-work/logo-light.svg'
 import logoMailSmirk from '@/images/clients/mail-smirk/logo-light.svg'
 import logoNorthAdventures from '@/images/clients/north-adventures/logo-light.svg'
 import logoPhobiaDark from '@/images/clients/phobia/logo-dark.svg'
-import logoPhobiaLight from '@/images/clients/phobia/logo-light.svg'
+import logoPhobiaLight from '@/images/clients/octommerce/logo-light.svg'
+import logoIronFxLight from '@/images/clients/ironfx/logo-light.svg'
 import logoUnseal from '@/images/clients/unseal/logo-light.svg'
 import imageLaptop from '@/images/laptop.jpg'
 import { loadMDXMetadata } from '@/lib/loadMDXMetadata'
@@ -24,13 +25,13 @@ import { Logo } from '@/components/Logo'
 
 const clients = [
   ['Phobia', logoPhobiaLight],
-  ['Family Fund', logoFamilyFund],
   ['Unseal', logoUnseal],
   ['Mail Smirk', logoMailSmirk],
-  ['Home Work', logoHomeWork],
-  ['Green Life', logoGreenLife],
-  ['Bright Path', logoBrightPath],
-  ['North Adventures', logoNorthAdventures],
+  ['IronFx', logoIronFxLight],
+  // ['Home Work', logoHomeWork],
+  // ['Green Life', logoGreenLife],
+  // ['Bright Path', logoBrightPath],
+  // ['North Adventures', logoNorthAdventures],
 ]
 
 function Clients() {

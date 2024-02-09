@@ -1,0 +1,55 @@
+import logo from '@/images/clients/octommerce/logomark-dark.svg'
+import imageHero from './hero.jpg'
+import imageDebraFiscal from './debra-fiscal.jpeg' // Assuming use of a placeholder image
+
+export const caseStudy = {
+  client: 'Octommerce',
+  title: 'Elevating Dropshipping with a Premier WordPress Solution',
+  description:
+    'Octommerce is a cutting-edge dropshipping platform built on WordPress, designed to empower entrepreneurs with a comprehensive and user-friendly online store solution.',
+  summary: [
+    'Octommerce leverages the flexibility of WordPress to offer a custom dropshipping solution that combines ease of use with powerful functionality, enabling users to efficiently manage and scale their online businesses.',
+    'Through custom development and strategic SEO, Octommerce has positioned itself as a leading dropshipping store, providing unparalleled support and resources to dropshippers worldwide.',
+  ],
+  logo, 
+  image: { src: imageHero },
+  date: '2019-02',
+  service: 'Web development, Custom WordPress Solution, SEO',
+  testimonial: {
+    author: { name: 'Ewa B', role: 'CEO of Octommerce' },
+    content:
+      'Partnering with the development team transformed our vision into reality. The custom WordPress platform they created not only meets but exceeds the needs of dropshippers, offering a scalable, user-friendly solution that truly stands out in the market.',
+  },
+}
+
+export const metadata = {
+  title: `${caseStudy.client} Case Study`,
+  description: caseStudy.description,
+}
+
+## Overview
+
+Recognizing the need for a specialized dropshipping platform, Octommerce was born out of the desire to provide entrepreneurs with an efficient, scalable, and easily manageable online store. Built on the versatile WordPress platform, Octommerce offers an intuitive user experience, advanced functionality, and the flexibility to grow with your business.
+
+## What we did
+
+<TagList>
+  <TagListItem>WordPress Development</TagListItem>
+  <TagListItem>Custom Plugin Integration</TagListItem>
+  <TagListItem>SEO Optimization</TagListItem>
+  <TagListItem>Performance Tuning</TagListItem>
+</TagList>
+
+<Blockquote
+  author={{ name: 'Ewa B', role: 'CEO of Octommerce' }}
+  image={{ src: imageDebraFiscal }}
+>
+  The journey to creating Octommerce was made possible with a team that not only understood our vision but also shared our passion for revolutionizing the dropshipping industry. Their expertise in custom WordPress solutions has set a new standard for what online stores can achieve.
+</Blockquote>
+
+<StatList>
+  <StatListItem value="300%" label="Increase in traffic" />
+  <StatListItem value="2x" label="Faster page load times" />
+  <StatListItem value="50%" label="Reduction in operational costs" />
+  <StatListItem value="Sustainable" label="Growth rate" />
+</StatList>
