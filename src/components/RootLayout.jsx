@@ -139,7 +139,8 @@ function Navigation() {
 }
 
 function RootLayoutInner({ children }) {
-  let panelId = useId()
+  // Replace useId with a static ID
+  const panelId = 'navigation-panel'
   let [expanded, setExpanded] = useState(false)
   let openRef = useRef()
   let closeRef = useRef()
@@ -165,7 +166,6 @@ function RootLayoutInner({ children }) {
       <header>
         <div
           className="absolute left-0 right-0 top-2 z-40 pt-14"
-          aria-hidden={expanded ? 'true' : undefined}
           inert={expanded ? '' : undefined}
         >
           <Header
@@ -187,7 +187,6 @@ function RootLayoutInner({ children }) {
           id={panelId}
           style={{ height: expanded ? 'auto' : '0.5rem' }}
           className="relative z-50 overflow-hidden bg-neutral-950 pt-2"
-          aria-hidden={expanded ? undefined : 'true'}
           inert={expanded ? undefined : ''}
         >
           <motion.div layout className="bg-neutral-800">

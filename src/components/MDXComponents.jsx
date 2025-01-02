@@ -1,15 +1,24 @@
+import React from 'react'
 import clsx from 'clsx'
-
+import dynamic from 'next/dynamic'
 import { Blockquote } from '@/components/Blockquote'
 import { Border } from '@/components/Border'
 import { GrayscaleTransitionImage } from '@/components/GrayscaleTransitionImage'
 import { StatList, StatListItem } from '@/components/StatList'
 import { TagList, TagListItem } from '@/components/TagList'
 
+const DynamicMermaid = dynamic(() => import('./Mermaid'), {
+  ssr: false,
+  loading: () => (
+    <div className="my-8 flex justify-center">Loading diagram...</div>
+  ),
+})
+
 export const MDXComponents = {
   Blockquote({ className, ...props }) {
     return <Blockquote className={clsx('my-32', className)} {...props} />
   },
+
   img: function Img({ className, ...props }) {
     return (
       <div
@@ -73,5 +82,50 @@ export const MDXComponents = {
         {...props}
       />
     )
+  },
+  pre: function Pre({ children, ...props }) {
+    const childNode = React.Children.only(children)
+    
+    // Handle Mermaid diagrams
+    if (childNode?.props?.className?.includes('language-mermaid')) {
+      let content = childNode.props.children
+      
+      // Handle different content formats
+      if (typeof content === 'string') {
+        content = content.trim()
+      } else if (Array.isArray(content)) {
+        content = content.join('\n').trim()
+      } else if (typeof content === 'object' && content !== null) {
+        content = content.props?.children || content.toString()
+      }
+      
+      console.log('Pre Mermaid content:', content)
+      return <DynamicMermaid chart={content} />
+    }
+
+    return <pre {...props}>{children}</pre>
+  },
+
+  code: function Code({ className, children, ...props }) {
+    // Handle Mermaid diagrams
+    if (className === 'language-mermaid') {
+      console.log('Code Mermaid content:', children)
+      
+      let chartContent = '';
+      if (typeof children === 'string') {
+        chartContent = children.trim();
+      } else if (Array.isArray(children)) {
+        chartContent = children.join('\n').trim();
+      } else if (typeof children === 'object' && children !== null) {
+        chartContent = children.props?.children || children.toString();
+      } else {
+        chartContent = String(children).trim();
+      }
+      
+      return <DynamicMermaid chart={chartContent} />
+    }
+
+    // Default code handling
+    return <code className={className} {...props}>{children}</code>
   },
 }

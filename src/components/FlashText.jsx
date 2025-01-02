@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const FlashText = ({ children, className, delay }) => {
+const FlashText = ({ children = "insert_your|text_here", className = "", delay = 4000 }) => {
    
    let text
       
@@ -66,12 +66,6 @@ const FlashText = ({ children, className, delay }) => {
          {sliderText}
       </motion.span>
    );
-};
-
-FlashText.defaultProps = {
-   children: "insert_your|text_here",
-   className: "",
-   delay: 4000,
 };
 
 export default FlashText;

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
 function Block({ x, y, ...props }) {
@@ -14,11 +14,13 @@ function Block({ x, y, ...props }) {
 }
 
 export function GridPattern({ yOffset = 0, interactive = false, ...props }) {
-  let id = useId()
+  // Use a static ID instead of useId()
+  const patternId = 'grid-pattern'
   let ref = useRef()
   let currentBlock = useRef()
   let counter = useRef(0)
   let [hoveredBlocks, setHoveredBlocks] = useState([])
+
   let staticBlocks = [
     [1, 1],
     [2, 2],
@@ -41,12 +43,14 @@ export function GridPattern({ yOffset = 0, interactive = false, ...props }) {
       let rect = ref.current.getBoundingClientRect()
       let x = event.clientX - rect.left
       let y = event.clientY - rect.top
+
       if (x < 0 || y < 0 || x > rect.width || y > rect.height) {
         return
       }
 
       x = x - rect.width / 2 - 32
       y = y - yOffset
+
       x += Math.tan(32 / 160) * y
       x = Math.floor(x / 96)
       y = Math.floor(y / 160)
@@ -66,7 +70,6 @@ export function GridPattern({ yOffset = 0, interactive = false, ...props }) {
     }
 
     window.addEventListener('mousemove', onMouseMove)
-
     return () => {
       window.removeEventListener('mousemove', onMouseMove)
     }
@@ -74,7 +77,12 @@ export function GridPattern({ yOffset = 0, interactive = false, ...props }) {
 
   return (
     <svg ref={ref} aria-hidden="true" {...props}>
-      <rect width="100%" height="100%" fill={`url(#${id})`} strokeWidth="0" />
+      <rect
+        width="100%"
+        height="100%"
+        fill={`url(#${patternId})`}
+        strokeWidth="0"
+      />
       <svg x="50%" y={yOffset} strokeWidth="0" className="overflow-visible">
         {staticBlocks.map((block) => (
           <Block key={`${block}`} x={block[0]} y={block[1]} />
@@ -96,7 +104,7 @@ export function GridPattern({ yOffset = 0, interactive = false, ...props }) {
       </svg>
       <defs>
         <pattern
-          id={id}
+          id={patternId}
           width="96"
           height="480"
           x="50%"

@@ -8,14 +8,21 @@ import { recmaImportImages } from 'recma-import-images'
 import remarkGfm from 'remark-gfm'
 import { remarkRehypeWrap } from 'remark-rehype-wrap'
 import remarkUnwrapImages from 'remark-unwrap-images'
+import remarkMermaid from 'remark-mermaidjs'
 import shiki from 'shiki'
 import { unifiedConditional } from 'unified-conditional'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
- 
-
+  transpilePackages: ['mermaid'],
+  webpack: (config, { isServer }) => {
+    // Mermaid needs special handling for SSR
+    if (isServer) {
+      config.externals = [...(config.externals || []), 'mermaid']
+    }
+    return config
+  },
 }
 
 function remarkMDXLayout(source) {
@@ -70,6 +77,7 @@ export default async function config() {
       remarkPlugins: [
         remarkGfm,
         remarkUnwrapImages,
+        [remarkMermaid, { theme: 'default' }],
         [
           unifiedConditional,
           [
