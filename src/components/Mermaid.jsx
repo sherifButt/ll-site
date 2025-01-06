@@ -12,7 +12,14 @@ try {
     htmlLabels: true,
     fontFamily: 'inherit',
     flowchart: {
-      curve: 'basis'
+      curve: 'basis',
+    },
+    sankey: {
+      width: 1000,
+      height: 1000,
+      linkColor: 'source',
+      nodeAlignment: 'left',
+      diagramMarginY: 140,
     },
     sequence: {
       diagramMarginX: 50,
@@ -26,7 +33,7 @@ try {
       messageMargin: 35,
       mirrorActors: true,
       bottomMarginAdj: 1,
-      useMaxWidth: true
+      useMaxWidth: true,
     },
     gantt: {
       titleTopMargin: 25,
@@ -38,17 +45,22 @@ try {
       fontSize: 11,
       fontFamily: 'inherit',
       numberSectionStyles: 4,
-      axisFormat: '%Y-%m-%d'
-    }
-  });
+      axisFormat: '%Y-%m-%d',
+    },
+  })
   console.log('Mermaid initialized successfully');
 } catch (error) {
   console.error('Mermaid initialization error:', error);
 }
 
+// Chart counter to track sequence numbers
+let chartCounter = 0
+
 export default function Mermaid({ chart }) {
   const mermaidRef = useRef()
   const graphId = useRef(`mermaid-${Math.random().toString(36).substr(2, 9)}`)
+  const [chartTitle, setChartTitle] = React.useState('')
+  const [chartNumber, setChartNumber] = React.useState(0)
 
   useEffect(() => {
     const renderDiagram = async () => {
@@ -80,6 +92,18 @@ export default function Mermaid({ chart }) {
             chartContent = String(chart);
           }
 
+          // Extract title from frontmatter if present
+          const frontmatterMatch = chartContent.match(/---\s*title:\s*(.*?)\s*---/);
+          if (frontmatterMatch && frontmatterMatch[1]) {
+            setChartTitle(frontmatterMatch[1].trim());
+          } else {
+            setChartTitle('');
+          }
+
+          // Increment and set chart number
+          chartCounter += 1;
+          setChartNumber(chartCounter);
+
           // Remove any leading/trailing whitespace and ensure proper line breaks
           chartContent = chartContent
             .split('\n')
@@ -94,10 +118,17 @@ export default function Mermaid({ chart }) {
 
           // Validate content starts with a valid Mermaid diagram type
           const validDiagramTypes = [
-            'mindmap', 'flowchart', 'sequenceDiagram', 
-            'classDiagram', 'stateDiagram', 'gantt',
-            'pie', 'erDiagram', 'journey'
-          ];
+            'mindmap',
+            'flowchart',
+            'sequenceDiagram',
+            'classDiagram',
+            'stateDiagram',
+            'gantt',
+            'pie',
+            'erDiagram',
+            'journey',
+            'sankey',
+          ]
           
           const firstLine = chartContent.trim().split('\n')[0];
           const isValid = validDiagramTypes.some(type => 
@@ -136,8 +167,19 @@ export default function Mermaid({ chart }) {
   }, [chart])
 
   return (
-    <div className="my-8 flex justify-center overflow-x-auto">
-      <div ref={mermaidRef} className="min-w-0" />
+    <div className="mermaid-container my-24 flex flex-col items-center" style={{ border: '1px solid red' }}>
+      <div className="mermaid-wrapper w-full overflow-x-auto mb-8" style={{ border: '1px solid blue' }}>
+        <div ref={mermaidRef} className="min-w-0" style={{ border: '1px solid green' }} />
+      </div>
+      {chartTitle ? (
+        <div className="mermaid-caption mt-8 mb-16 px-4 py-2 bg-gray-50 rounded-lg text-sm text-gray-600" style={{ border: '1px solid orange' }}>
+          chart [{String(chartNumber).padStart(2, '0')}]. {chartTitle}
+        </div>
+      ) : (
+        <div className="mermaid-caption mt-8 mb-16 px-4 py-2 bg-gray-50 rounded-lg text-sm text-gray-600" style={{ border: '1px solid orange' }}>
+          chart [{String(chartNumber).padStart(2, '0')}]
+        </div>
+      )}
     </div>
   )
 }

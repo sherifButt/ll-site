@@ -100,7 +100,11 @@ export const MDXComponents = {
       }
       
       console.log('Pre Mermaid content:', content)
-      return <DynamicMermaid chart={content} />
+      return (
+        <div className="my-16">
+          <DynamicMermaid chart={content} />
+        </div>
+      )
     }
 
     return <pre {...props}>{children}</pre>
@@ -113,16 +117,22 @@ export const MDXComponents = {
       
       let chartContent = '';
       if (typeof children === 'string') {
-        chartContent = children.trim();
+        chartContent = children;
       } else if (Array.isArray(children)) {
-        chartContent = children.join('\n').trim();
+        chartContent = children.join('\n');
       } else if (typeof children === 'object' && children !== null) {
         chartContent = children.props?.children || children.toString();
       } else {
-        chartContent = String(children).trim();
+        chartContent = String(children);
       }
+      // Preserve any leading/trailing whitespace that might be part of the frontmatter
+      chartContent = chartContent.toString()
       
-      return <DynamicMermaid chart={chartContent} />
+      return (
+        <div className="my-16">
+          <DynamicMermaid chart={chartContent} />
+        </div>
+      )
     }
 
     // Default code handling
