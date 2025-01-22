@@ -187,7 +187,7 @@ export default async function Home() {
           </h1>
           <p className="mt-6 text-xl text-neutral-600">
            <Logo className='w-36 inline '/> is a software development agency based in Cardiff, We are working at the intersection of design and
-            technology. <u>you dream it, we build it.</u>
+            technology. <u>you dream it, we build it..</u>
           </p>
         </FadeIn>
       </Container>
