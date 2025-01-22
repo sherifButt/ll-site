@@ -29,6 +29,9 @@ const navigation = [
       { title: 'Process', href: '/process' },
       { title: 'Blog', href: '/blog' },
       { title: 'Contact us', href: '/contact' },
+      { title: 'Privacy Policy', href: '/privacy-policy' },
+      { title: 'Terms of Service', href: '/terms-of-service' },
+      { title: 'GDPR', href: '/gdpr-compliance' },
     ],
   },
   {
