@@ -14,7 +14,7 @@ function Block({ x, y, ...props }) {
 }
 
 export function GridPattern({ yOffset = 0, interactive = false, ...props }) {
-  let id = useId()
+  const id = 'grid-pattern'
   let ref = useRef()
   let currentBlock = useRef()
   let counter = useRef(0)

@@ -139,7 +139,7 @@ function Navigation() {
 }
 
 function RootLayoutInner({ children }) {
-  let panelId = useId()
+  let panelId = 'navigation-menu'
   let [expanded, setExpanded] = useState(false)
   let openRef = useRef()
   let closeRef = useRef()
