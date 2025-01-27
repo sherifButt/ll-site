@@ -1,28 +1,35 @@
+// src/components/Chatbot.jsx
 'use client'
 import React, { useEffect } from 'react';
 
 function Chatbot() {
   useEffect(() => {
-      // Ensure the script hasn't already been added
-      if (!document.getElementById('voiceflow-script')) {
-          const scriptElem = document.createElement('script');
-          scriptElem.id = 'voiceflow-script';
-          scriptElem.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
-          scriptElem.type = "text/javascript";
-          scriptElem.onload = () => {
-              window.voiceflow.chat.load({
-                  verify: { projectID: '652da078cde70b0008e1c5de' },
-                  url: 'https://general-runtime.voiceflow.com',
-                  versionID: 'production'
-              });
-          };
+    if (!document.getElementById('chatwoot-script')) {
+      const BASE_URL = 'https://chatwoot.loyalleads.co.uk'
+      const g = document.createElement('script')
+      g.id = 'chatwoot-script'
+      g.src = BASE_URL + '/packs/js/sdk.js'
+      g.defer = true
+      g.async = true
 
-          // Insert the script element to the DOM
-          const firstScriptElem = document.getElementsByTagName('script')[0];
-          firstScriptElem.parentNode.insertBefore(scriptElem, firstScriptElem);
+      g.onload = () => {
+        window.chatwootSDK.run({
+          websiteToken: 'WHcX98tCBxw1czkt2KTTQcnb',
+          baseUrl: 'https://chatwoot.loyalleads.co.uk',
+          customAttributes: {
+            // Add attributes for bot context
+            botEndpoint:
+              'https://n8n.loyalleads.co.uk/webhook/7855073f-3aad-45f9-a255-5325d85ba079/chat',
+          },
+        })
       }
-  }, []); // Empty dependency array ensures this runs once after component mount
 
+      const s = document.getElementsByTagName('script')[0]
+      s.parentNode.insertBefore(g, s)
+    }
+  }, [])
+
+  return null
 }
 
 export default  Chatbot
