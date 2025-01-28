@@ -258,7 +258,7 @@ export default async function Home() {
           <FadeIn className="max-w-3xl">
             <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl">
               Your{' '}
-              <FlashText delay={4000} className="font-bold">
+              <FlashText delay={7000} className="font-bold">
                 Full Stack|Web|Mobile|E-commerce
               </FlashText>{' '}
               App Development Partner
@@ -271,10 +271,10 @@ export default async function Home() {
           </FadeIn>
         </div>
         <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">
-          <BackgroundIllustration className="absolute left-3/4 top-4 h-[1026px] w-[1026px] translate-x-1/3 stroke-gray-300/70 [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] sm:top-16 sm:-translate-x-1/2 sm:-translate-y-1/3 lg:-top-16 lg:ml-12 xl:-top-14 xl:ml-0" />
-          <div className="-mx-4 h-[448px] px-9 [mask-image:linear-gradient(to_bottom,white_60%,transparent)] sm:mx-0 lg:absolute lg:-inset-x-10 lg:bottom-20 lg:-top-10 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
+          {/* <BackgroundIllustration className="absolute left-3/4 top-4 h-[1026px] w-[1026px] translate-x-1/3 stroke-gray-300/70 [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] sm:top-16 sm:-translate-x-1/2 sm:-translate-y-1/3 lg:-top-16 lg:ml-12 xl:-top-14 xl:ml-0" /> */}
+          <div className="-mx-4 min-h-[600px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0 sm:-translate-y-[300px] lg:absolute lg:-inset-x-10 lg:bottom-20 lg:-top-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
             <PhoneFrame
-              className="mx-auto h-[748px] max-w-[366px] sm:-translate-y-[600px]"
+              className="mx-auto h-[728px] max-w-[366px] sm:translate-x-[300px] sm:-translate-y-[40px]"
               priority
             >
               <AppDemo />

@@ -168,7 +168,7 @@ export function AppDemo() {
       <AppScreen.Body>
         <div className="p-4">
           <div className="flex gap-2">
-            <div className="text-xs/6 text-gray-500">Tailwind Labs, Inc.</div>
+            <div className="text-xs/6 text-gray-500">Loyalleads, Inc.</div>
             <div className="text-sm text-gray-900">$CSS</div>
             <svg viewBox="0 0 24 24" className="ml-auto h-6 w-6" fill="none">
               <path
