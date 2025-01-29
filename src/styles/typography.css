@@ -1,7 +1,7 @@
 .typography {
   color: theme(colors.neutral.950);
-  font-size: theme(fontSize.xl);
-  line-height: theme(fontSize.xl[1].lineHeight);
+  font-size: theme(fontSize.lg);
+  line-height: theme(fontSize.lg[1].lineHeight);
 
   --shiki-color-text: theme(colors.white);
   --shiki-color-background: theme(colors.neutral.950);

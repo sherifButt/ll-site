@@ -1,0 +1,82 @@
+.chatWidget {
+  --chat--border-radius: 25px;
+  --chat--color-light: white;
+  --chat--color-primary: Black;
+  --chat--color-primary-shade-50: #00000099;
+  --chat--color-light-shade-50: rgb(250, 250, 251,1);
+  --chat--color-light-shade-100: rgba(249, 249, 251, 1);
+  --chat--input--send--button--color: black;
+
+
+  --chat--spacing: 1rem;
+  --chat--window--width: 380px;
+  --chat--window--height: 740px;
+ 
+
+
+  /* Chat window */
+
+  --chat--window--border-radius: 16px;
+  --chat--window--border: 1px solid var(--chat--color-light-shade-100);
+
+  /* Chat body */
+  --chat--body--background: linear-gradient(var(--chat--color-light-shade-50),var(--chat--color-light-shade-100));
+
+  /* Header */
+  --chat--header--border-top: none;
+  --chat--header--border-bottom: none;
+  --chat--header--border-bottom: none;
+  --chat--header--border-bottom: none;
+  --chat--header--background: var(--chat--color-light-shade-50);
+  --chat--header--color: var(--chat--color-primary);
+  --chat--heading--font-size: 1.7rem;
+
+  /* Messages */
+  --chat--message--font-size: 12px;
+  --chat--message--font-size: 12px;
+  --chat--message--font-weight: 200;
+  --chat--message-line-height: 1.4;
+  --chat--message--border-radius: var(--chat--border-radius); 
+  --chat--message--bot--background: var(--chat--color-light);
+  --chat--message--padding: 10px 16px;
+  --chat--message--margin-bottom: 6px;
+
+  --chat--message--user--background: var(--chat--color-primary);
+
+  /* Input */
+  --chat--textarea--border-radius: var(--chat--border-radius);
+  --chat--color-disabled: var(--chat--color-light-shade-100);
+  --chat--input--font-size: .95rem;
+  --chat--input-font-weight: 200;
+  /* Toggle button */
+  --chat--toggle--border-radius: 100px;
+  --chat--toggle--hover--background: var(--chat--color-primary);
+  --chat--toggle--active--background: var(--chat--color-light-shade-100);
+  --chat--toggle--background: var(--chat--color-primary);
+
+}
+
+.chat-header {
+  display: flex !important;
+  align-items: center !important;
+  padding: 16px !important;
+}
+
+.chat-logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+.chat-header::before {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  /* background-image: url('@images/loyalleads_logo.png');. */
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}

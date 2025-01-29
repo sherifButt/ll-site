@@ -92,7 +92,7 @@ function CaseStudies({ caseStudies }) {
         <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {caseStudies.map((caseStudy) => (
             <FadeIn key={caseStudy.href} className="flex">
-              <article className="relative flex w-full flex-col rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
+              <article className="relative flex w-full flex-col bg-white rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
                 <h3>
                   <Link href={caseStudy.href}>
                     <span className="absolute inset-0 rounded-3xl" />
@@ -269,7 +269,7 @@ export default async function Home() {
               </FlashText>{' '}
               App Development Partner
             </h1>
-            <p className="mt-6 text-xl text-neutral-600">
+            <p className="mt-6 text-lg text-neutral-500">
               <Logo className="inline w-36 " /> is a software development agency
               based in Cardiff, We are working at the intersection of design and
               technology. <u>you dream it, we build it..</u>
@@ -285,10 +285,10 @@ export default async function Home() {
               priority
             >
               <Carousel interval={7000} autoPlay>
+                <AppDemo />
                 <CampaignList />
-                {/* <AppDemo /> */}
+                <StockList />
                 {/* <AppScreen /> */}
-                {/* <StockList /> */}
                 {/* <Image src={givestarMobile} alt="Phobia" unoptimized /> */}
               </Carousel>
             </PhoneFrame>
