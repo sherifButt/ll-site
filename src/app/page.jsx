@@ -25,6 +25,10 @@ import { Logo } from '@/components/Logo'
 import { useId } from 'react'
 import { PhoneFrame } from '@/components/PhoneFrame'
 import { AppDemo } from '@/components/AppDemo'
+import { Carousel } from '@/components/Carousel'
+import { AppScreen } from '@/components/AppScreen'
+import StockList from '@/components/StockList'
+
 
 const clients = [
   ['Phobia', logoPhobiaLight],
@@ -277,7 +281,11 @@ export default async function Home() {
               className="mx-auto h-[728px] max-w-[366px] sm:translate-x-[300px] sm:-translate-y-[40px]"
               priority
             >
-              <AppDemo />
+              <Carousel interval={7000} autoPlay>
+                <AppDemo />
+                <AppScreen />
+                <StockList />
+              </Carousel>
             </PhoneFrame>
           </div>
         </div>
