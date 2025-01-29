@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import clsx from 'clsx'
 
-function Logo(props) {
+function DefaultLogo(props) {
   return (
     <svg viewBox="0 0 79 24" fill="none" aria-hidden="true" {...props}>
       <path
@@ -21,7 +21,7 @@ function MenuIcon(props) {
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
         d="M5 6h14M5 18h14M5 12h14"
-        stroke="#fff"
+        // stroke="#fff"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -35,7 +35,7 @@ function UserIcon(props) {
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
         d="M15 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.696 19h10.608c1.175 0 2.08-.935 1.532-1.897C18.028 15.69 16.187 14 12 14s-6.028 1.689-6.836 3.103C4.616 18.065 5.521 19 6.696 19Z"
-        stroke="#fff"
+        // stroke={props.iconClassName || '#fff'}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -44,13 +44,86 @@ function UserIcon(props) {
   )
 }
 
-export function AppScreen({ children, className, ...props }) {
+function Signal(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M4 4v16M8 4v16M12 4v16M16 4v16"
+        // stroke={props.iconClassName || '#fff'}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function Wifi(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M5 12.55c1.8-1.8 4.7-1.8 6.5 0M12 19.5c-3.9-3.9-10.2-3.9-14.1 0"
+        // stroke={props.iconClassName || '#fff'}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function Battery(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M23 7H20V3H4v4H1"
+        // stroke={props.iconClassName || '#fff'}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function StatusBar({ className, strokeColor = 'stroke-white' }) {
+  return (
+    <div
+      className={clsx('flex items-center justify-between px-4 py-2', className)}
+    >
+      <div className="flex items-center gap-1">
+        <time className={clsx('text-sm font-medium', strokeColor)}>9:41</time>
+      </div>
+      <div className="flex items-center gap-2">
+        <Signal className={clsx('h-4 w-4', strokeColor)} />
+        <Wifi className={clsx('h-4 w-4', strokeColor)} />
+        <Battery className={clsx('h-4 w-4', strokeColor)} />
+      </div>
+    </div>
+  )
+}
+
+export function AppScreen({
+  children,
+  className,
+  Logo,
+  iconClassName = 'stroke-white',
+  backgroundColor = 'bg-gray-900',
+  strokeColor = 'stroke-white',
+  ...props
+}) {
+  const LogoComponent = Logo || DefaultLogo
+
   return (
     <div className={clsx('flex flex-col', className)} {...props}>
+      
+      
       <div className="flex justify-between px-4 pt-4">
-        <MenuIcon className="h-6 w-6 flex-none" />
-        <Logo className="h-6 flex-none" />
-        <UserIcon className="h-6 w-6 flex-none" />
+        <MenuIcon className={clsx('h-6 w-6 flex-none ', iconClassName)} />
+        <LogoComponent
+          className={clsx('h-6 flex-none ', className)}
+        />
+        <UserIcon className={clsx('h-6 w-6 flex-none ', iconClassName)} />
       </div>
       {children}
     </div>
@@ -83,7 +156,7 @@ AppScreen.Subtitle = forwardRef(function AppScreenSubtitle({ children }, ref) {
 
 AppScreen.Body = forwardRef(function AppScreenBody(
   { children, className },
-  ref,
+  ref
 ) {
   return (
     <div

@@ -15,6 +15,7 @@ import logoHomeWork from '@/images/clients/home-work/logo-light.svg'
 import logoMailSmirk from '@/images/clients/mail-smirk/logo-light.svg'
 import logoNorthAdventures from '@/images/clients/north-adventures/logo-light.svg'
 import logoPhobiaDark from '@/images/clients/phobia/logo-dark.svg'
+import givestarMobile from '@/images/clients/givestar/portfolio_99.webp'
 import logoPhobiaLight from '@/images/clients/octommerce/logo-light.svg'
 import logoIronFxLight from '@/images/clients/ironfx/logo-light.svg'
 import logoUnseal from '@/images/clients/unseal/logo-light.svg'
@@ -28,6 +29,7 @@ import { AppDemo } from '@/components/AppDemo'
 import { Carousel } from '@/components/Carousel'
 import { AppScreen } from '@/components/AppScreen'
 import StockList from '@/components/StockList'
+import CampaignList from '@/components/CampaignList'
 
 
 const clients = [
@@ -276,15 +278,18 @@ export default async function Home() {
         </div>
         <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">
           {/* <BackgroundIllustration className="absolute left-3/4 top-4 h-[1026px] w-[1026px] translate-x-1/3 stroke-gray-300/70 [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] sm:top-16 sm:-translate-x-1/2 sm:-translate-y-1/3 lg:-top-16 lg:ml-12 xl:-top-14 xl:ml-0" /> */}
-          <div className="-mx-4 min-h-[600px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0 sm:-translate-y-[300px] lg:absolute lg:-inset-x-10 lg:bottom-20 lg:-top-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
+          <div className="-mx-4 min-h-[575px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0 sm:-translate-y-[300px] lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
             <PhoneFrame
-              className="mx-auto h-[728px] max-w-[366px] sm:translate-x-[300px] sm:-translate-y-[40px]"
+              className="mx-auto h-[728px] max-w-[366px] sm:-translate-y-[40px] sm:translate-x-[300px]"
+            
               priority
             >
               <Carousel interval={7000} autoPlay>
-                <AppDemo />
-                <AppScreen />
-                <StockList />
+                <CampaignList />
+                {/* <AppDemo /> */}
+                {/* <AppScreen /> */}
+                {/* <StockList /> */}
+                {/* <Image src={givestarMobile} alt="Phobia" unoptimized /> */}
               </Carousel>
             </PhoneFrame>
           </div>
