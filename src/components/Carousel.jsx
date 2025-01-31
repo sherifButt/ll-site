@@ -73,7 +73,7 @@ export function Carousel({ children, interval = 5000, autoPlay = true }) {
 
   return (
     <div
-      className="relative h-full w-full overflow-hidden"
+      className="relative h-full w-full "
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}

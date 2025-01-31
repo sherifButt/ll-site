@@ -4,20 +4,14 @@ import { useRouter, usePathname } from 'next/navigation'
 import '@n8n/chat/style.css'
 import { createChat } from '@n8n/chat'
 import styles from './chat-widget.module.css'
-const logoPath = '/images/loyalleads_logo.png'
+const logoPath = '../../images/loyalleads_logo.png' // Image from public directory
 
-interface NavigationEvent extends CustomEvent { 
-   detail: string
-}
 
-interface ChatWidgetProps {
-   logoUrl?: string
-}
 
-export default function ChatWidget({ logoUrl }: ChatWidgetProps) {
+export default function ChatWidget({ logoUrl }) {
    const router = useRouter()
    const pathname = usePathname()
-   const chatRef = useRef<any>(null)
+   const chatRef = useRef(null)
 
    const updateMetadata = () => {
       const metadata = {
@@ -32,7 +26,7 @@ export default function ChatWidget({ logoUrl }: ChatWidgetProps) {
 
       const chatFrame = document.querySelector('iframe[title="n8n Chat"]')
       if (chatFrame) {
-         ;(chatFrame as HTMLIFrameElement).contentWindow?.postMessage(
+         ;(chatFrame).contentWindow?.postMessage(
             {
                type: 'updateMetadata',
                metadata,
@@ -42,7 +36,7 @@ export default function ChatWidget({ logoUrl }: ChatWidgetProps) {
       }
    }
 
-   const processLinks = (container: Element) => {
+   const processLinks = (container) => {
       const links = container.getElementsByTagName('a')
       Array.from(links).forEach(link => {
          const href = link.getAttribute('href')
@@ -66,7 +60,7 @@ export default function ChatWidget({ logoUrl }: ChatWidgetProps) {
             if (mutation.type === 'childList') {
                mutation.addedNodes.forEach(node => {
                   if (node.nodeType === 1) {
-                     processLinks(node as Element)
+                     processLinks(node)
                   }
                })
             }
@@ -259,6 +253,9 @@ export default function ChatWidget({ logoUrl }: ChatWidgetProps) {
 
          .chat-message-markdown img {
            border-radius: 4px;
+         }
+         .chat-window-toggle {
+           border: 1px solid color(srgb 0.9755 0.9806 0.9849);
          }
        `}</style>
        <script

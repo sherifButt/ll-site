@@ -30,6 +30,9 @@ import { Carousel } from '@/components/Carousel'
 import { AppScreen } from '@/components/AppScreen'
 import StockList from '@/components/StockList'
 import CampaignList from '@/components/CampaignList'
+import { LaptopFrame } from '@/components/LaptopFrame'
+import HomeScreen from '@/components/HomeScreen'
+import BentoGrids from '@/components/BentoGrids'
 
 
 const clients = [
@@ -278,8 +281,19 @@ export default async function Home() {
         </div>
         <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">
           {/* <BackgroundIllustration className="absolute left-3/4 top-4 h-[1026px] w-[1026px] translate-x-1/3 stroke-gray-300/70 [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] sm:top-16 sm:-translate-x-1/2 sm:-translate-y-1/3 lg:-top-16 lg:ml-12 xl:-top-14 xl:ml-0" /> */}
-          <div className="-mx-4 min-h-[575px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0 sm:-translate-y-[300px] lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
-            <PhoneFrame
+
+          <div className="-mx-4 min-h-[575px] min-w-[950px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0  lg:-translate-y-[300px] lg:min-w-[2325px] lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
+            <LaptopFrame className="mx-auto h-[728px] max-w-[980px] lg:-translate-y-[40px] md:translate-x-[0px]">
+               <Carousel interval={7000} autoPlay>
+              <HomeScreen />
+              <BentoGrids />  
+              </Carousel>
+            </LaptopFrame>
+          </div>
+
+          {/*<div className="-mx-4 min-h-[575px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0 sm:-translate-y-[300px] lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
+            
+             <PhoneFrame
               className="mx-auto h-[728px] max-w-[366px] sm:-translate-y-[40px] sm:translate-x-[300px]"
             
               priority
@@ -288,11 +302,10 @@ export default async function Home() {
                 <AppDemo />
                 <CampaignList />
                 <StockList />
-                {/* <AppScreen /> */}
-                {/* <Image src={givestarMobile} alt="Phobia" unoptimized /> */}
+               
               </Carousel>
             </PhoneFrame>
-          </div>
+          </div>*/}
         </div>
       </Container>
 

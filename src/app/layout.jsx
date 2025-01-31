@@ -13,12 +13,10 @@ export const metadata = {
 export default function Layout({ children }) {
   return (
     <html lang="en" className="h-full bg-neutral-950 text-base antialiased">
-  
       <body className="flex min-h-full flex-col">
-      <ChatWidget/>
+        <ChatWidget logoUrl="/images/loyalleads_logo.png" />
         <RootLayout>{children}</RootLayout>
       </body>
-      
     </html>
   )
 }
