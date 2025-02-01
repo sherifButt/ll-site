@@ -27,13 +27,16 @@ import { useId } from 'react'
 import { PhoneFrame } from '@/components/PhoneFrame'
 import { AppDemo } from '@/components/AppDemo'
 import { Carousel } from '@/components/Carousel'
+import  VerticalShuffle  from '@/components/Shuffle'
 import { AppScreen } from '@/components/AppScreen'
 import StockList from '@/components/StockList'
 import CampaignList from '@/components/CampaignList'
 import { LaptopFrame } from '@/components/LaptopFrame'
 import HomeScreen from '@/components/HomeScreen'
 import BentoGrids from '@/components/BentoGrids'
-
+import PricingPage from '@/components/PricingPage'
+import Stacked from '@/components/Stacked'
+import Ecommerce from '@/components/Ecommerce'
 
 const clients = [
   ['Phobia', logoPhobiaLight],
@@ -48,14 +51,15 @@ const clients = [
 
 function Clients() {
   return (
-    <div className="mt-24 rounded-4xl mx-1  bg-neutral-950 py-20   sm:mt-32 sm:py-32 lg:mt-56">
+    <div className="mx-1 mt-24 rounded-4xl  bg-neutral-950 py-20   sm:mt-32 sm:py-32 lg:mt-56">
       <Container>
         <FadeIn className="flex items-center gap-x-8">
           <h2 className="font-display text-4xl font-medium text-white [text-wrap:balance] sm:text-4xl">
             Our Clients
           </h2>
           <h2 className="text-left font-display text-sm  tracking-wider text-white sm:text-left">
-          <Logo className='w-24 inline ' invert/> has worked with numerous clients and delivered exceptional results
+            <Logo className="inline w-24 " invert /> has worked with numerous
+            clients and delivered exceptional results
           </h2>
           <div className="h-px flex-auto bg-neutral-800" />
         </FadeIn>
@@ -95,7 +99,7 @@ function CaseStudies({ caseStudies }) {
         <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {caseStudies.map((caseStudy) => (
             <FadeIn key={caseStudy.href} className="flex">
-              <article className="relative flex w-full flex-col bg-white rounded-3xl p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
+              <article className="relative flex w-full flex-col rounded-3xl bg-white p-6 ring-1 ring-neutral-950/5 transition hover:bg-neutral-50 sm:p-8">
                 <h3>
                   <Link href={caseStudy.href}>
                     <span className="absolute inset-0 rounded-3xl" />
@@ -281,31 +285,38 @@ export default async function Home() {
         </div>
         <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">
           {/* <BackgroundIllustration className="absolute left-3/4 top-4 h-[1026px] w-[1026px] translate-x-1/3 stroke-gray-300/70 [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] sm:top-16 sm:-translate-x-1/2 sm:-translate-y-1/3 lg:-top-16 lg:ml-12 xl:-top-14 xl:ml-0" /> */}
+          <VerticalShuffle
+            interval={21000}
+            autoPlay
+            vertical
+            shuffleIntensity={4}
+            className="h-full w-full"
+          >
+            <div className="-mx-4 min-h-[575px]  px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0  lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:min-w-[2325px] lg:-translate-y-[300px] lg:px-0 lg:pt-10 xl:-bottom-32">
+              <LaptopFrame className="mx-auto h-[728px] max-w-[980px] md:translate-x-[0px] lg:-translate-y-[40px]">
+                <Carousel interval={7000} autoPlay>
+                  <HomeScreen />
+                  {/* <BentoGrids /> */ }
+                  <Stacked />
+                  <Ecommerce />
+                  {/* <PricingPage/> */}
+                </Carousel>
+              </LaptopFrame>
+            </div>
 
-          <div className="-mx-4 min-h-[575px] min-w-[950px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0  lg:-translate-y-[300px] lg:min-w-[2325px] lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
-            <LaptopFrame className="mx-auto h-[728px] max-w-[980px] lg:-translate-y-[40px] md:translate-x-[0px]">
-               <Carousel interval={7000} autoPlay>
-              <HomeScreen />
-              <BentoGrids />  
-              </Carousel>
-            </LaptopFrame>
-          </div>
-
-          {/*<div className="-mx-4 min-h-[575px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0 sm:-translate-y-[300px] lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
-            
-             <PhoneFrame
-              className="mx-auto h-[728px] max-w-[366px] sm:-translate-y-[40px] sm:translate-x-[300px]"
-            
-              priority
-            >
-              <Carousel interval={7000} autoPlay>
-                <AppDemo />
-                <CampaignList />
-                <StockList />
-               
-              </Carousel>
-            </PhoneFrame>
-          </div>*/}
+            <div className="-mx-4 min-h-[575px] px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0 sm:-translate-y-[300px] lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
+              <PhoneFrame
+                className="mx-auto h-[728px] max-w-[366px] sm:-translate-y-[40px] sm:translate-x-[300px]"
+                priority
+              >
+                <Carousel interval={7000} autoPlay>
+                  <AppDemo />
+                  <CampaignList />
+                  <StockList />
+                </Carousel>
+              </PhoneFrame>
+            </div>
+          </VerticalShuffle>
         </div>
       </Container>
 
