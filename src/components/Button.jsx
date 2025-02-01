@@ -10,7 +10,7 @@ export function Button({ invert, href, className, children, ...props }) {
       : 'bg-neutral-950 text-white hover:bg-neutral-800'
   )
 
-  let inner = <span className="relative top-px">{children}</span>
+  let inner = <span className="relative flex top-px">{children}</span>
 
   if (href) {
     return (
