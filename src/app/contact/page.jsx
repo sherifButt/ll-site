@@ -69,6 +69,7 @@ export default function Contact() {
     <>
       <PageIntro eyebrow="Contact us" title="Let’s work together">
         <p>We can’t wait to hear from you.</p>
+        <p className='text-5xl mt-12'>↓</p>
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">

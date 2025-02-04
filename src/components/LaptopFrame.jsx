@@ -65,7 +65,7 @@ export function LaptopFrame({
   ...props
 }) {
   return (
-    <div className={clsx('relative aspect-[597/315]', className)} {...props}>
+    <div className={clsx('relative aspect-[597/315] px-4  ', className)} {...props}>
       {/* Shadow effect */}
       <div className="absolute inset-y-[2%] left-[1%] right-[1%] rounded-xl shadow-2xl" />
 

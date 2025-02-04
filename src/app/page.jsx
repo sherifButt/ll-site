@@ -38,8 +38,12 @@ import PricingPage from '@/components/PricingPage'
 import Stacked from '@/components/Stacked'
 import Ecommerce from '@/components/Ecommerce'
 import { Button } from '@/components/Button'
-import { PlayIcon } from '@heroicons/react/20/solid'
-import { ClockIcon } from '@heroicons/react/24/outline'
+import {
+  PlayIcon,
+  DocumentCurrencyPoundIcon
+} from '@heroicons/react/20/solid'
+import { ClockIcon,
+  QuestionMarkCircleIcon} from '@heroicons/react/24/outline'
 
 const clients = [
   ['Phobia', logoPhobiaLight],
@@ -263,9 +267,9 @@ function BackgroundIllustration(props) {
   )
 }
 
-function Slider () {
+function Slider() {
   return (
-    <div className="-mx-4 min-h-[625px]  px-9 [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0  lg:absolute lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:min-w-[2325px] lg:-translate-y-[375px] lg:px-0 lg:pt-10 xl:-bottom-32">
+    <div className="-mx-6 min-h-[425px] px-0  [mask-image:linear-gradient(to_bottom,white_80%,transparent)] sm:mx-0 lg:absolute  lg:-inset-x-10 lg:-top-20 lg:bottom-20 lg:h-auto lg:min-h-[625px] lg:min-w-[2325px] lg:-translate-y-[375px] lg:px-0 lg:pt-10 xl:-bottom-32">
       <VerticalShuffle
         interval={14000}
         autoPlay
@@ -276,6 +280,7 @@ function Slider () {
       >
         <PhoneFrame
           className="mx-auto h-[728px] max-w-[366px] sm:-translate-x-[200px] sm:-translate-y-[40px]"
+          id="Phone-Frame"
           priority
         >
           <Carousel interval={7000} autoPlay>
@@ -309,15 +314,19 @@ export default async function Home() {
           <div className="relative z-50 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6"></div>
           <FadeIn className="max-w-3xl">
             <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl">
-              Your Next{' '}
-              <FlashText delay={14000} className="font-bold">
-                Mobile|Web
+              We will Build Your{' '}
+              <FlashText delay={16000} className="font-bold">
+                Web App|Mobile App|Website
               </FlashText>{' '}
-              App{' '}
-              <FlashText delay={7000} className="font-bold">
-                Will|Should
-              </FlashText>{' '}
-              Look like This <span className="hidden lg:inline-block">→</span>
+              like This{' '}
+              <span className="ml-4">
+                <span className="hidden lg:inline-block">→</span>
+                <span className="lg:hidden ">
+                  <a href="#Phone-Frame" className="" id="form-container">
+                    ↓
+                  </a>
+                </span>
+              </span>
             </h1>
             <p className="mt-6 text-lg text-neutral-500">
               <Logo className="inline w-36 " /> is a web development agency
@@ -325,16 +334,22 @@ export default async function Home() {
               customer love.
             </p>
             <p>
-              <strong>Have a business idea? Let us Quote it for free </strong>
+              {/* <strong>Have a business idea? Let us Quote it for free </strong> */}
             </p>
-            <Button
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-              variant="outline"
-              className="mt-10"
-            >
-              <ClockIcon className="h-6 w-6 " />
-              <span className="ml-2.5">Get Free Quote in Minutes</span>
-            </Button>
+            <div className="mt-10 lg:flex hidden gap-4 ">
+              <Button href="/quotation">
+                <DocumentCurrencyPoundIcon className="h-5 w-5" />
+                <span className="ml-2.5">Get Free Quote Now!</span>
+              </Button>
+              <Button
+                href="/quotation"
+                variant="outline"
+                
+              >
+                <QuestionMarkCircleIcon className="h-5 w-5" />
+                <span className="ml-2.5">Know more</span>
+              </Button>
+            </div>
           </FadeIn>
         </div>
         <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">

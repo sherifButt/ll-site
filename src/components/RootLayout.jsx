@@ -20,6 +20,7 @@ import { GridPattern } from '@/components/GridPattern'
 import { Logo, Logomark } from '@/components/Logo'
 import { Offices } from '@/components/Offices'
 import { SocialMedia } from '@/components/SocialMedia'
+import { ClockIcon, DocumentCurrencyPoundIcon } from '@heroicons/react/20/solid'
 
 const RootLayoutContext = createContext({})
 
@@ -71,8 +72,16 @@ function Header({
           />
         </Link>
         <div className="flex items-center gap-x-8">
-          <Button href="/contact" invert={invert}>
+          <Button
+            href="/contact"
+            className="hidden lg:inline-block"
+            invert={invert}
+          >
             Contact us
+          </Button>
+          <Button href="/quotation" className="lg:hidden" invert={invert}>
+            <DocumentCurrencyPoundIcon className="h-5 w-5" />
+            <span className="ml-2.5">Get Free Quote</span>
           </Button>
           <button
             ref={toggleRef}
