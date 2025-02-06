@@ -286,7 +286,7 @@ function Slider() {
           <Carousel interval={7000} autoPlay>
             <AppDemo />
             <CampaignList />
-            {/* <StockList /> */}
+            <StockList />
           </Carousel>
         </PhoneFrame>
 

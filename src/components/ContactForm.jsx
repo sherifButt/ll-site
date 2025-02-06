@@ -127,7 +127,7 @@ export function ContactForm() {
         }
     }, [gptResponse])
     return (
-        <FadeIn className="lg:order-last">
+        <div className="lg:order-last">
             <form onSubmit={handleSubmit} ref={gptResponseRef}>
                 <h2 className="font-display text-base font-semibold text-neutral-950" >
                     {sent ? 'Received ✓' : 'Work inquiries'}
@@ -201,6 +201,6 @@ export function ContactForm() {
                     </div>}
                 </Button>}
             </form>
-        </FadeIn>
+        </div>
     )
 }

@@ -54,7 +54,7 @@ const PageTitle = () => (
       </span>
       <span className="sr-only"> - </span>
       <span className="mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl">
-        Smart Quotes for Your Projects <span className="ml-8">→</span>
+        Smart Quotes for Your Projects 
       </span>
     </h1>
     <div className="mt-6 max-w-3xl text-xl text-neutral-600">
@@ -84,14 +84,13 @@ export default function Quote() {
     <>
       <Container className="mt-24 sm:mt-32 lg:mt-40 ">
         <FadeIn>
-
-          <div className="grid lg:grid-cols-2 lg:gap-x-8 gap-y-16">
+          <div className="grid gap-y-16 lg:grid-cols-2 lg:gap-x-8">
             <PageTitle />
             <QuotationForm />
           </div>
 
           {/* Quote Instructions */}
-          <div className="mt-24 sm:mt-32 lg:mt-24">
+          <div className="mt-24  lg:mt-12">
             <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
               <ProjectProcess />
             </div>

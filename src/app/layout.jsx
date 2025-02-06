@@ -1,5 +1,6 @@
+// src/app/layout.jsx
 
-import ChatWidget from '@/components/chat-widget/chat-widget'
+import ChatWidgetWrapper from '@/components/chat-widget/ChatWidgetWrapper'
 import { RootLayout } from '@/components/RootLayout'
 import '@/styles/tailwind.css'
 
@@ -17,7 +18,7 @@ export default function Layout({ children }) {
       className="h-full scroll-smooth bg-neutral-950 text-base antialiased"
     >
       <body className="flex min-h-full flex-col">
-        <ChatWidget logoUrl="/images/loyalleads_logo.png" />
+        <ChatWidgetWrapper />
         <RootLayout>{children}</RootLayout>
       </body>
     </html>

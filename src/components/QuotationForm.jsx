@@ -9,7 +9,7 @@ import { renderMarkdown } from '@/lib/renderMarkdown'
 const Tooltip = ({ children }) => {
   
   return (
-    <div className="invisible absolute -top-[80px] left-1/2 w-[300px] -translate-x-1/2 opacity-0 transition-all duration-300 ease-in-out group-hover:visible group-hover:opacity-100 md:-left-[308px] md:top-1/2 md:-translate-x-0 md:-translate-y-1/2">
+    <div className="invisible absolute -top-[200px] left-1/2 w-[300px] -translate-x-1/2 opacity-0 transition-all duration-300 ease-in-out group-hover:visible group-hover:opacity-100 md:-left-[308px] md:top-1/2 md:-translate-x-0 md:-translate-y-1/2">
       <div className="relative flex items-center">
         <div className="relative w-full rounded-lg border border-black bg-black px-2 py-2 text-sm text-neutral-100 backdrop-filter">
           {renderHTML(children)}
@@ -382,8 +382,11 @@ export function QuotationForm() {
   const [isSending, setIsSending] = useState(false)
   const [quote, setQuote] = useState('')
   const [readyToSubmit, setReadyToSubmit] = useState(false)
-  const [errors, setErrors] = useState({})
-  const formTitleRef = useRef(null)
+  const [ errors, setErrors ] = useState( {} )
+  const [ isStarted, setIsStarted ] = useState( false )
+  
+  const formTitleRef = useRef( null )
+  
 
   const scrollToTitle = () => {
     formTitleRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -471,6 +474,23 @@ export function QuotationForm() {
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
+
+  const InitialStep = () => (
+    <div className="flex flex-col items-center justify-center space-y-6 py-12">
+      <div className="text-center">
+        <p className="text-4xl">↓</p>
+        {/* <h2 className="font-display text-3xl font-semibold text-neutral-950">
+          Get Your Project Quote
+        </h2> */}
+        <p className="mt-2 text-lg text-neutral-500">
+          Answer a few questions to receive a detailed project estimate
+        </p>
+      </div>
+      <Button type="button" onClick={() => setIsStarted(true)} className="mt-8">
+        Start Questionnaire →
+      </Button>
+    </div>
+  )
 
   const renderStep1 = () => (
     <div className="isolate -space-y-px rounded-2xl bg-white">
@@ -748,116 +768,130 @@ export function QuotationForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex items-center justify-between " ref={formTitleRef}>
-        <h2 className="font-display text-base font-semibold text-neutral-950">
-          {sent
-            ? `Quote Sent to your email ${formData.email} ✓` 
-            : readyToSubmit
-            ? 'Review Your Details'
-            : stepTitles[step]}
-        </h2>
-        {!sent && (
-          <span className="text-sm text-neutral-500">Step {step} of 5</span>
-        )}
-      </div>
-
-      {!sent && (
-        <div className="mt-6">
-          <div className="border-1 mb-10 h-2 w-full rounded-full border-neutral-100 bg-neutral-100">
-            <div
-              className="h-2 rounded-full bg-neutral-950 transition-all duration-300 "
-              style={{ width: `${(step / 5) * 100}%` }}
-            />
+      {!isStarted ? (
+        <InitialStep />
+      ) : (
+        <>
+          <div className="flex items-center justify-between" ref={formTitleRef}>
+            <h2 className="font-display text-base font-semibold text-neutral-950">
+              <p className="text-4xl">↓</p>
+              {/* <p className="text-sm font-normal">Start Now:</p> */}
+              {sent
+                ? `Quote Sent to your email ${formData.email} ✓`
+                : readyToSubmit
+                ? 'Review Your Details'
+                : stepTitles[step]}
+            </h2>
+            {!sent && (
+              <span className="text-sm text-neutral-500">Step {step} of 5</span>
+            )}
           </div>
 
-          {step === 1 && renderStep1()}
-          {step === 2 && renderStep2()}
-          {step === 3 && renderStep3()}
-          {step === 4 && renderStep4()}
-          {step === 5 && renderStep5()}
+          {!sent && (
+            <div className="mt-6">
+              <div className="border-1 mb-10 h-2 w-full rounded-full border-neutral-100 bg-neutral-100">
+                <div
+                  className="h-2 rounded-full bg-neutral-950 transition-all duration-300"
+                  style={{ width: `${(step / 5) * 100}%` }}
+                />
+              </div>
 
-          <div className="mt-10 flex justify-between gap-4">
-            {step > 1 && (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => {
-                  setStep((prev) => prev - 1)
-                  setReadyToSubmit(false)
-                  scrollToTitle()
-                }}
-              >
-                ← Previous
-              </Button>
-            )}
+              {step === 1 && renderStep1()}
+              {step === 2 && renderStep2()}
+              {step === 3 && renderStep3()}
+              {step === 4 && renderStep4()}
+              {step === 5 && renderStep5()}
 
-            {step < 5 ? (
-              <Button
-                type="button"
-                onClick={handleNextStep}
-                className="ml-auto"
-              >
-                Next →
-              </Button>
-            ) : (
-              <Button type="submit" className="ml-auto flex items-center gap-2">
-                {!isSending ? (
-                  <>
-                    {readyToSubmit ? 'Get Quote' : 'Review Details'}
-                    {readyToSubmit && <PaperAirplaneIcon className="h-4 w-4" />}
-                  </>
-                ) : (
-                  <div className="flex items-center">
-                    <svg
-                      className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      />
-                    </svg>
-                    Processing...
-                  </div>
+              <div className="mt-10 flex justify-between gap-4">
+                {step > 1 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      setStep((prev) => prev - 1)
+                      setReadyToSubmit(false)
+                      scrollToTitle()
+                    }}
+                  >
+                    ← Previous
+                  </Button>
                 )}
-              </Button>
-            )}
-          </div>
-        </div>
-      )}
 
-      {sent && (
-        <div className="mt-6 rounded-2xl border border-neutral-300 bg-white px-6 py-8">
-          <h3 className="text-base/6 ">{renderMarkdown(quote)}</h3>
-        </div>
-      )}
+                {step < 5 ? (
+                  <Button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="ml-auto"
+                  >
+                    Next →
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    className="ml-auto flex items-center gap-2"
+                  >
+                    {!isSending ? (
+                      <>
+                        {readyToSubmit ? 'Get Quote' : 'Review Details'}
+                        {readyToSubmit && (
+                          <PaperAirplaneIcon className="h-4 w-4" />
+                        )}
+                      </>
+                    ) : (
+                      <div className="flex items-center">
+                        <svg
+                          className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          />
+                        </svg>
+                        Processing...
+                      </div>
+                    )}
+                  </Button>
+                )}
+              </div>
+            </div>
+          )}
 
-      {sent && (
-        <Button
-          type="button"
-          className="mt-10"
-          onClick={() => {
-            setSent(false)
-            setStep(1)
-            setReadyToSubmit(false)
-            setFormData(formInitialValues)
-            setErrors({})
-            scrollToTitle()
-          }}
-        >
-          Get Another Quote
-        </Button>
+          {sent && (
+            <div className="mt-6 rounded-2xl border border-neutral-300 bg-white px-6 py-8">
+              <h3 className="text-base/6">{renderMarkdown(quote)}</h3>
+            </div>
+          )}
+
+          {sent && (
+            <Button
+              type="button"
+              className="mt-10"
+              onClick={() => {
+                setSent(false)
+                setStep(1)
+                setReadyToSubmit(false)
+                setFormData(formInitialValues)
+                setErrors({})
+                scrollToTitle()
+                setIsStarted(false) // Added this line to return to initial step
+              }}
+            >
+              Get Another Quote
+            </Button>
+          )}
+        </>
       )}
     </form>
   )
