@@ -51,7 +51,7 @@ const PageTitle = () => (
   <div>
     <h1>
       <span className="block font-display text-base font-semibold text-neutral-950">
-        Get a Quote
+        -
       </span>
       <span className="sr-only"> - </span>
       <span className="mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl">
@@ -87,13 +87,14 @@ export default function Quote() {
         <FadeIn>
           <div className="relative grid gap-y-16 lg:grid-cols-2 lg:gap-x-8">
             <PageTitle />
-            <div className="-ml-4 lg:absolute lg:right-[100px] lg:-top-[75git px]">
+            <div className="-ml-4 lg:absolute lg:-top-[75px] lg:right-[100px]">
               <ChatWidget
                 instanceId="quote-chat"
                 webhookUrl="https://n8n.loyalleads.co.uk/webhook/e4529fdb-bd13-4847-b2a7-33b926224765/chat"
                 mode="fullscreen"
                 logoUrl="/images/loyalleads_logo.png"
-                title="↓."
+                title="↓ Get a Quote"
+                subtitle=""
                 initialMessages={[
                   ' Hi there!',
                   "I'm a chatbot here to help you get a quote for your project. ",
@@ -104,7 +105,7 @@ export default function Quote() {
 'Complex' for a large marketplace,
 'Innovative' for AI-driven platforms.`,
                 ]}
-                getStarted="→ Start Your Project's Quote Now ←"
+                getStarted="→ Start Your Project's Quote Now"
                 chatLayoutStyle={{
                   border: '1px solid #e5e7eb',
                   borderRadius: '25px',
@@ -115,7 +116,7 @@ export default function Quote() {
                 }}
                 headerStyle={{
                   background: 'rgb(255 255 255 / 0.7 )',
-                  display: 'none',
+                  // display: 'none',
                 }}
                 bodyStyle={{
                   background: 'rgb(255 255 255 / 0.7 )',

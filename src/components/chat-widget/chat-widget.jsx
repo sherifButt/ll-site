@@ -15,7 +15,9 @@ export default function ChatWidget({
   showWelcomeScreen = true,
   inputPlaceholder = 'Type a message ..',
   getStarted = 'New Conversation',
-  title = 'Hi there...',
+   title = 'Hi there...',
+  subtitle="",
+  footer="",
   initialMessages = [
     'Hi there!',
     'My name is Emily, welcome to Michelle Marshall Salon. How can I assist you today?',
@@ -140,8 +142,8 @@ export default function ChatWidget({
       i18n: {
         en: {
           title: title,
-          subtitle: '',
-          footer: '',
+          subtitle: subtitle,
+          footer: footer,
           getStarted: getStarted,
           inputPlaceholder: inputPlaceholder,
           closeButtonTooltip: 'Close chat',
