@@ -18,8 +18,8 @@ export default function Layout({ children }) {
       className="h-full scroll-smooth bg-neutral-950 text-base antialiased"
     >
       <body className="flex min-h-full flex-col">
-        <ChatWidgetWrapper />
         <RootLayout>{children}</RootLayout>
+        <ChatWidgetWrapper />
       </body>
     </html>
   )

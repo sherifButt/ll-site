@@ -66,24 +66,23 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <FadeIn>
-      <div className="grid gap-y-16 p-8 lg:grid-cols-2 lg:gap-x-8 lg:p-12">
-        <div>
-          <PageIntro eyebrow="Contact us" title="Let’s work together">
-            <p>We can’t wait to hear from you.</p>
-            {/* <p className='text-5xl mt-12'>↓</p> */}{' '}
-          </PageIntro>
-          <Container className="mt-24 sm:mt-32 lg:mt-40 hidden lg:inline-block">
+    <Container className="mt-24 sm:mt-32 lg:mt-40 ">
+      <FadeIn>
+        <div className="grid  p-8 lg:grid-cols-2 lg:gap-x-8 lg:p-12">
+          <div>
+            <PageIntro eyebrow="Contact us" title="Let’s work together">
+              <p>We can’t wait to hear from you.</p>
+              {/* <p className='text-5xl mt-12'>↓</p> */}{' '}
+            </PageIntro>
+
             <ContactDetails />
-          </Container>
+          </div>
+         
+            <ContactForm />
+       
         </div>
-        <dive className="mt-12 sm:mt-32 lg:mt-40">
-          <ContactForm />
-        </dive>
-      </div>
-      <Container className="mt-24 sm:mt-32 lg:mt-40 inline-block lg:hidden">
         <ContactDetails />
-      </Container>
-    </FadeIn>
+      </FadeIn>
+    </Container>
   )
 }

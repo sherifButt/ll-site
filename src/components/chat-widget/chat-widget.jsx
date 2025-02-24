@@ -115,24 +115,105 @@ export default function ChatWidget({
     })
   }
 
-  useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === 'childList') {
-          mutation.addedNodes.forEach((node) => {
-            if (node.nodeType === 1) {
-              processLinks(node)
+ const processChatOptions = (container) => {
+    // Find all message elements
+    const messages = container.querySelectorAll('.chat-message-markdown')
+    
+    messages.forEach(message => {
+      // Don't process if already processed
+      if (message.hasAttribute('data-processed-options')) return
+      
+      // Process links in the message
+      const links = message.querySelectorAll('a')
+      links.forEach(link => {
+        const text = link.textContent.trim()
+        // Check if this is a chat option link
+        if ( link.getAttribute('href')?.startsWith('~')) {
+          // Prevent default link behavior
+          link.onclick = (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            
+            // Find the chat input
+            const chatInput = document.querySelector('.chat-inputs textarea')
+            if (chatInput) {
+              // Remove the arrow symbol and trim
+              const inputText = text.replace('→', '').trim()
+              
+              // Set the value
+              chatInput.value = inputText
+              
+              // Dispatch input event to enable send button
+              const inputEvent = new Event('input', { bubbles: true })
+              chatInput.dispatchEvent(inputEvent)
+              
+              // Find and click send button after a short delay
+              setTimeout(() => {
+                const sendButton = document.querySelector('.chat-input-send-button')
+                if (sendButton && !sendButton.disabled) {
+                  sendButton.click()
+                }
+              }, 100)
             }
-          })
+          }
+          
+         //  // Style the link as a button
+         //  link.style.display = 'block'
+         //  link.style.marginBottom = '8px'
+         //  link.style.padding = '10px'
+         //  link.style.backgroundColor = '#ffffff'
+         //  link.style.border = '1px solid #e2e8f0'
+         //  link.style.borderRadius = '8px'
+         //  link.style.textDecoration = 'none'
+         //  link.style.color = '#0a0a0a'
+         //  link.style.fontSize = '0.85rem'
+         //  link.style.cursor = 'pointer'
+         //  link.style.transition = 'background-color 0.2s'
+          
+         //  // Add hover effect
+         //  link.onmouseover = () => {
+         //    link.style.backgroundColor = '#f7fafc'
+         //  }
+         //  link.onmouseout = () => {
+         //    link.style.backgroundColor = '#ffffff'
+         //  }
         }
       })
+      
+      // Mark as processed
+      message.setAttribute('data-processed-options', 'true')
     })
+  }
+  
+  
 
-    const chat = createChat({
+useEffect(() => {
+  let chatInstance = null // Store chat instance reference
+
+  // Clean up any existing chat instances
+  const cleanup = () => {
+    const existingChat = document.querySelector('#n8n-chat iframe')
+    if (existingChat) {
+      existingChat.remove()
+    }
+    if (chatInstance) {
+      // Cleanup chat instance if it has an unmount method
+      if (typeof chatInstance.unmount === 'function') {
+        chatInstance.unmount()
+      }
+    }
+  }
+
+  // Create new chat instance
+  const initChat = () => {
+    cleanup() // Clean up before creating new instance
+
+    chatInstance = createChat({
       webhookUrl: webhookUrl,
       mode: mode,
       showWelcomeScreen: showWelcomeScreen,
       chatSessionKey: 'sessionId',
+      allowFileUploads: true,
       metadata: {
         page: window.location.pathname,
         title: document.title,
@@ -150,33 +231,67 @@ export default function ChatWidget({
         },
       },
     })
+  }
 
-    const setupObserver = () => {
-      const chatContainer = document.querySelector('.chat-messages-list')
-      if (chatContainer) {
-        processLinks(chatContainer)
-        observer.observe(chatContainer, {
-          childList: true,
-          subtree: true,
-        })
-        return true
-      }
-      return false
+  initChat()
+
+  // Set up observers after chat is initialized
+  const setupObservers = () => {
+    const chatContainer = document.querySelector('.chat-messages-list')
+    if (!chatContainer) return false
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === 1) {
+              processChatOptions(node)
+              processLinks(node)
+            }
+          })
+        }
+      })
+    })
+
+    processLinks(chatContainer)
+    processChatOptions(chatContainer)
+    observer.observe(chatContainer, {
+      childList: true,
+      subtree: true,
+    })
+
+    return observer
+  }
+
+  // Try to set up observers with retry
+  let observer = null
+  const observerInterval = setInterval(() => {
+    observer = setupObservers()
+    if (observer) {
+      clearInterval(observerInterval)
     }
+  }, 500)
 
-    const interval = setInterval(() => {
-      if (setupObserver()) {
-        clearInterval(interval)
-      }
-    }, 500)
-
-    setTimeout(() => clearInterval(interval), 10000)
-
-    return () => {
+  // Cleanup function
+  return () => {
+    if (observer) {
       observer.disconnect()
-      clearInterval(interval)
     }
-  }, [router])
+    clearInterval(observerInterval)
+    cleanup()
+  }
+}, [
+  webhookUrl,
+  mode,
+  showWelcomeScreen,
+  initialMessages,
+  title,
+  subtitle,
+  footer,
+  getStarted,
+  inputPlaceholder,
+  router,
+])
 
   useEffect(() => {
     setTimeout(updateMetadata, 100)
@@ -264,6 +379,7 @@ export default function ChatWidget({
 
         .chat-window {
           box-shadow: 0 2px 48px rgba(19, 33, 68, 0.16);
+          
         }
 
         .chat-layout {
@@ -292,6 +408,7 @@ export default function ChatWidget({
 
         .chat-message {
           width: fit-content;
+          max-width: 90%;
           font-weight: 300;
           box-shadow: 0 0.25rem 6px #32325d14, 0 1px 3px #0000000d;
           ${convertStyleToCss(messageStyle)}
@@ -400,6 +517,60 @@ export default function ChatWidget({
 
         .chat-message-markdown img {
           border-radius: 4px;
+        }
+
+        .chat-option-button {
+          display: inline-block;
+          margin: 5px;
+          padding: 8px 16px;
+          background-color: #ffffff;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          color: #0a0a0a;
+          cursor: pointer;
+          font-size: 0.875rem;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .chat-option-button:hover {
+          background-color: #f3f4f6;
+        }
+
+        /* Chat window toggle button */
+
+        .chat-message-markdown ul {
+          display: flex;
+          flex-wrap: wrap;
+          x-gap: 10px;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+        }
+
+        .chat-message-markdown li {
+          margin: 0;
+          padding: 0;
+        }
+
+        .chat-message-markdown a {
+          display: inline-block;
+          margin: 5px;
+          padding: 8px 16px;
+          background-color: #ffffff;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          color: #0a0a0a;
+          cursor: pointer;
+          font-size: 0.875rem;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .chat-message-markdown a:hover {
+          background-color: #f3f4f6;
         }
       `}</style>
       <script

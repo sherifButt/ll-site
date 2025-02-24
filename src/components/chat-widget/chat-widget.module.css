@@ -18,7 +18,7 @@
   /* Chat window */
 
   --chat--window--border-radius: 16px;
-  --chat--window--border: 1px solid var(--chat--color-light-shade-100);
+  --chat--window--border: 1px solid color(srgb 0.875 0.875 0.875);;
 
   /* Chat body */
   --chat--body--background: linear-gradient(var(--chat--color-light-shade-50),var(--chat--color-light-shade-100));

@@ -20,6 +20,8 @@ import logoPhobiaLight from '@/images/clients/octommerce/logo-light.svg'
 import logoIronFxLight from '@/images/clients/ironfx/logo-light.svg'
 import logoUnseal from '@/images/clients/unseal/logo-light.svg'
 import imageLaptop from '@/images/laptop.jpg'
+import octommerce from '@/images/hero.jpg'
+import hst from '@/images/portfolio_76.jpg'
 import { loadMDXMetadata } from '@/lib/loadMDXMetadata'
 import FlashText from '@/components/FlashText'
 import { Logo } from '@/components/Logo'
@@ -279,7 +281,7 @@ function Slider() {
         initialAnimation={false}
       >
         <PhoneFrame
-          className="mx-auto h-[728px] max-w-[366px] sm:-translate-x-[200px] sm:-translate-y-[40px]"
+          className="mx-auto h-[728px] max-w-[366px] sm:-translate-x-[200px] sm:-translate-y-[0px]"
           id="Phone-Frame"
           priority
         >
@@ -290,11 +292,13 @@ function Slider() {
           </Carousel>
         </PhoneFrame>
 
-        <LaptopFrame className="mx-auto h-[728px] max-w-[980px] md:translate-x-[0px] lg:-translate-y-[40px]">
+        <LaptopFrame className="mx-auto h-[728px] max-w-[980px] md:translate-x-[0px] lg:-translate-y-[0px]">
           <Carousel interval={7000} autoPlay>
-            <HomeScreen />
+            {/* <HomeScreen /> */}
             {/* <BentoGrids /> */}
             <Stacked />
+            <Image src={hst} />
+            <Image src={octommerce} />
             {/* <Ecommerce /> */}
             {/* <PricingPage/> */}
           </Carousel>
