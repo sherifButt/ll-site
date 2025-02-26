@@ -1,0 +1,70 @@
+# Loyal Leads Project Rules
+
+## Coding Patterns
+
+### Component Structure
+- Components are organized by functionality, not by page
+- UI components are kept simple and focused on presentation
+- Feature components handle business logic and state
+- Layout components manage page structure and composition
+
+### Naming Conventions
+- PascalCase for component names (e.g., `ContactForm.jsx`)
+- camelCase for utility functions and variables
+- Descriptive, purpose-based naming for all elements
+- Avoid abbreviations in component and function names
+
+### File Organization
+- Components live in `/src/components/`
+- Pages use Next.js App Router in `/src/app/`
+- Utility functions in `/src/lib/`
+- Static assets in `/public/` and `/src/images/`
+
+### Styling Approach
+- Tailwind CSS for most styling needs
+- CSS modules for component-specific styling
+- Consistent color palette and spacing
+- Mobile-first responsive design
+
+## Development Workflow
+
+### Feature Implementation
+1. Understand requirements fully before coding
+2. Create or modify components as needed
+3. Implement functionality with appropriate error handling
+4. Test across different device sizes
+5. Document any API integrations or special considerations
+
+### API Integration
+- API routes in `/src/app/api/[endpoint]/route.js`
+- Environment variables for sensitive information
+- Error handling for all API calls
+- Revalidation patterns for dynamic content
+
+### Content Management
+- MDX for blog posts and documentation
+- Content API for dynamic content updates
+- Consistent metadata structure for all content
+- Proper image optimization for all media
+
+## Project Preferences
+
+### Code Style
+- Clean, readable code over clever solutions
+- Consistent indentation (2 spaces)
+- Meaningful comments for complex logic
+- Proper error handling throughout
+
+### Performance Considerations
+- Optimize images and large assets
+- Minimize client-side JavaScript where possible
+- Use appropriate Next.js rendering strategies
+- Consider loading states for async operations
+
+### Accessibility
+- Semantic HTML elements
+- Proper ARIA attributes where needed
+- Keyboard navigation support
+- Color contrast compliance
+
+This document captures the key patterns, preferences, and project intelligence for the Loyal Leads website. It will be updated as new patterns emerge or existing ones evolve.
