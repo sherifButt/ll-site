@@ -6,7 +6,9 @@
     "dev": "next dev -p 3004",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:content-api": "node scripts/test-content-api.js",
+    "generate:api-key": "node scripts/generate-api-key.js"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
@@ -44,6 +46,7 @@
     "unified-conditional": "0.0.2"
   },
   "devDependencies": {
+    "dotenv": "^16.4.7",
     "eslint": "8.26.0",
     "eslint-config-next": "*",
     "prettier": "^2.8.7",
