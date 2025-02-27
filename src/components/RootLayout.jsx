@@ -234,6 +234,12 @@ function RootLayoutInner({ children }) {
                     </h2>
                     <SocialMedia className="mt-6" invert />
                   </div>
+                  <div>
+                    <h2 className="font-display text-base font-semibold text-white">
+                      V 1.6.0
+                    </h2>
+                    
+                  </div>
                 </div>
               </Container>
             </div>
