@@ -28,6 +28,7 @@ try {
 const config = {
   apiKey: process.env.CONTENT_API_KEY || 'your-api-key',
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3004',
+  gitAccessToken: process.env.GIT_ACCESS_TOKEN || '',
   type: 'blog', // 'blog' or 'work'
   slug: `test-post-${Date.now()}`,
   title: 'Test Post',

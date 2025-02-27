@@ -86,12 +86,16 @@ This guide helps you diagnose and resolve common issues that may arise when usin
 1. Remote repository not accessible
 2. Authentication issues
 3. Branch protection rules
+4. Missing or invalid Git Access Token
 
 **Solutions:**
 1. Verify network connectivity to the git repository
 2. Check git credentials and permissions
 3. Ensure the server has permission to push to the branch
 4. Consider using a dedicated branch for automated content
+5. Verify that `GIT_ACCESS_TOKEN` is set correctly in your environment variables
+6. Ensure the Git Access Token has sufficient permissions for the repository
+7. Check that the token hasn't expired
 
 ## Revalidation Issues
 
@@ -237,6 +241,7 @@ This guide helps you diagnose and resolve common issues that may arise when usin
    - `NEXT_PUBLIC_BASE_URL`
    - `ENABLE_GIT_OPERATIONS` (if using git)
    - `GIT_USER_NAME` and `GIT_USER_EMAIL` (if using git)
+   - `GIT_ACCESS_TOKEN` (recommended for secure git authentication)
 2. Check that environment variables are accessible to the application
 3. Restart the application after changing environment variables
 
@@ -254,6 +259,7 @@ This guide helps you diagnose and resolve common issues that may arise when usin
    - `CONTENT_API_KEY` should be a string without spaces
    - `NEXT_PUBLIC_BASE_URL` should include protocol (e.g., `https://example.com`)
    - `ENABLE_GIT_OPERATIONS` should be "true" or "false"
+   - `GIT_ACCESS_TOKEN` should be a valid personal access token without spaces
 2. Remove any leading or trailing whitespace
 3. Escape special characters if necessary
 

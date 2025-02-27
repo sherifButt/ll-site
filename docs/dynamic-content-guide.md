@@ -258,12 +258,14 @@ NEXT_PUBLIC_BASE_URL=https://your-site.com
 ENABLE_GIT_OPERATIONS=true
 GIT_USER_NAME=your-git-username
 GIT_USER_EMAIL=your-git-email
+GIT_ACCESS_TOKEN=your-personal-access-token
 ```
 
 - **CONTENT_API_KEY**: A secure API key for authenticating requests
 - **NEXT_PUBLIC_BASE_URL**: The base URL of your site (used for revalidation)
 - **ENABLE_GIT_OPERATIONS**: Set to "true" to enable git operations
 - **GIT_USER_NAME** and **GIT_USER_EMAIL**: Git user configuration for commits
+- **GIT_ACCESS_TOKEN**: A personal access token for Git authentication (recommended for secure pushing)
 
 ## Setting Up n8n Workflow
 

@@ -117,7 +117,39 @@ ${content}`;
       
       await execAsync(`cd ${process.cwd()} && git add .`);
       await execAsync(`cd ${process.cwd()} && git commit -m "Add new ${type} post: ${title}"`);
-      await execAsync(`cd ${process.cwd()} && git push`);
+      
+      // Use token for authentication if provided
+      if (process.env.GIT_ACCESS_TOKEN) {
+        try {
+          // Get the current remote URL
+          const { stdout: remoteUrl } = await execAsync('git config --get remote.origin.url');
+          
+          // Construct token-based URL (handles both HTTPS and SSH formats)
+          let tokenUrl;
+          if (remoteUrl.trim().startsWith('https://')) {
+            // For HTTPS URLs: https://TOKEN@github.com/user/repo.git
+            tokenUrl = remoteUrl.trim().replace('https://', `https://${process.env.GIT_ACCESS_TOKEN}@`);
+          } else {
+            // For SSH URLs, convert to HTTPS with token
+            const sshMatch = remoteUrl.trim().match(/git@([^:]+):([^\/]+)\/(.+)\.git/);
+            if (sshMatch) {
+              const [_, host, user, repo] = sshMatch;
+              tokenUrl = `https://${process.env.GIT_ACCESS_TOKEN}@${host}/${user}/${repo}.git`;
+            } else {
+              tokenUrl = remoteUrl.trim(); // Fallback to original if format not recognized
+            }
+          }
+          
+          await execAsync(`cd ${process.cwd()} && git push ${tokenUrl}`);
+        } catch (gitError) {
+          console.error('Error during git operations with token:', gitError);
+          // Fallback to standard push if token approach fails
+          await execAsync(`cd ${process.cwd()} && git push`);
+        }
+      } else {
+        // Standard push if no token provided
+        await execAsync(`cd ${process.cwd()} && git push`);
+      }
     }
     
     // Revalidate the path to make the new content visible immediately
